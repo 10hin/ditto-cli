@@ -1,1 +1,3 @@
-hoge: fuga from file
+server:
+  http:
+    url_prefix: http://localhost/
