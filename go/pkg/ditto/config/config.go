@@ -3,6 +3,7 @@ package config
 import (
 	"bytes"
 	"encoding/json"
+	"net/http"
 )
 
 func Parse(raw map[string]interface{}) (*DittoConfig, error) {
@@ -41,6 +42,10 @@ type HTTPConfig struct {
 	URLPrefix string           `json:"url_prefix"`
 	Basic     *BasicAuthConfig `json:"basic,omitempty"`
 	TLS       *TLSConfig       `json:"tls,omitempty"`
+}
+
+func (c *HTTPConfig) Client() *http.Client {
+
 }
 
 type WebsocketConfig struct {
