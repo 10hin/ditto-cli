@@ -7,5 +7,5 @@ type Client interface {
 }
 
 type ThingClient interface {
-	GetThing(thingID string) model.Thing
+	GetThing(thingID string) (*model.Thing, error)
 }
