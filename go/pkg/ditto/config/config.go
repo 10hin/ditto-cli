@@ -5,22 +5,31 @@ import (
 	"encoding/json"
 )
 
+var (
+	cfg *DittoConfig = nil
+)
+
 func Parse(raw map[string]interface{}) (*DittoConfig, error) {
 	var err error
 
-	jsonliteral := &bytes.Buffer{}
-	err = json.NewEncoder(jsonliteral).Encode(raw)
+	jsonLiteral := &bytes.Buffer{}
+	err = json.NewEncoder(jsonLiteral).Encode(raw)
 	if err != nil {
 		return nil, err
 	}
 
 	parsed := &DittoConfig{}
-	err = json.NewDecoder(jsonliteral).Decode(parsed)
+	err = json.NewDecoder(jsonLiteral).Decode(parsed)
 	if err != nil {
 		return nil, err
 	}
 
+	cfg = parsed
 	return parsed, nil
+}
+
+func Get() *DittoConfig {
+	return cfg
 }
 
 type DittoConfig struct {
