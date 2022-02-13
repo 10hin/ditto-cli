@@ -13,8 +13,8 @@ import (
 )
 
 const (
-	PATH_APIV2  = "/api/2"
-	PATH_THINGS = "/things"
+	pathAPIV2  = "/api/2"
+	pathThings = "/things"
 )
 
 func newThingClient(client *http.Client, cfg *config.HTTPConfig) interfaces.ThingClient {
@@ -33,14 +33,14 @@ type thingClient struct {
 	timeout time.Duration
 }
 
-func (c *thingClient) GetThing(thingID string) (*model.Thing, error) {
+func (c *thingClient) Get(thingID string) (*model.Thing, error) {
 	var err error
 
 	reqURL := fmt.Sprintf(
 		"%s%s%s/%s?fields=%s&timeout=%dms&channel=%s",
 		c.urlPrefix,
-		PATH_APIV2,
-		PATH_THINGS,
+		pathAPIV2,
+		pathThings,
 		thingID,
 		strings.Join([]string{
 			"thingId",

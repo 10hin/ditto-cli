@@ -1,8 +1,12 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/spf13/cobra"
+	"golang.10h.in/ditto/cli/pkg/ditto/client/http"
+	"golang.10h.in/ditto/cli/pkg/ditto/config"
+	"golang.10h.in/ditto/cli/pkg/ditto/model"
 	"log"
 )
 
@@ -15,7 +19,7 @@ var (
 			log.Println("getThingCmd.Run() called")
 			defer log.Println("getThingCmd.Run() finished")
 
-			//var err error
+			var err error
 
 			// TODO: remove following debug code
 			log.Println("args:")
@@ -26,19 +30,17 @@ var (
 			log.Printf("  flag --output=%s\n", outputFormat)
 			log.Printf("  flag --config=%s", cfgFile)
 
-			// TODO: remove obove debug log
+			var thing *model.Thing
+			thing, err = http.NewClient(config.Get().Server.HTTP).Thing().Get(args[0])
+			if err != nil {
+				log.Printf("request failed: %#v\n", err)
+				panic(err)
+			}
 
-			log.Println("getThingCmd.Run() not implemented yet")
-			panic(fmt.Errorf("getThingCmd.Run() not implemented yet"))
+			var s []byte
+			s, err = json.MarshalIndent(thing, "", "    ")
+			fmt.Printf("%s\n", s)
 
 		},
 	}
 )
-
-func NewGetThingCmd() *cobra.Command {
-	return getThingCmd
-}
-
-func getThing(cmd *cobra.Command, thingID string) {
-
-}

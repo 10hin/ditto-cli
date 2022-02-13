@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"context"
 	"encoding/json"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -40,6 +39,7 @@ func Execute() {
 }
 
 func init() {
+	log.SetOutput(os.Stderr)
 	log.Println("init() called")
 	defer log.Println("init() finished")
 	cobra.OnInitialize(initConfig)
@@ -88,7 +88,6 @@ func initConfig() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	context.WithValue(rootCmd.Context(), "cfg", cfg)
 	var cfgBytes []byte
 	cfgBytes, err = json.Marshal(cfg)
 	if err != nil {
