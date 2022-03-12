@@ -32,7 +32,7 @@ Legend:
 
 | Command&nbsp;\\&nbsp;Protocol                 | CLI Command                                             | HTTP     | Websocket | AMQP 0.9.1 | AMQP 1.0 | MQTT 3.1.1 | MQTT 5 | HTTP 1.1 | Kafka 2.x |
 |:----------------------------------------------|---------------------------------------------------------|----------|-----------|------------|----------|------------|--------|----------|-----------|
-| `GET /things?ids={thingId1},{thingId2}[,...]` | `get thing {thingId1}} {thingId2} [...]`                | &#x2713; |           |            |          |            |        |          |           |
+| `GET /things?ids={thingId1},{thingId2}[,...]` | `get thing {thingId1} {thingId2} [...]`                 | &#x2713; |           |            |          |            |        |          |           |
 | `POST /things`                                | `create thing -f {filePath&rang` (no `{thingId}` param) |          |           |            |          |            |        |          |           |
 | `GET /things/{thingId}`                       | `get thing {thingId}`                                   |          |           |            |          |            |        |          |           |
 | `PUT /things/{thingId}` (`If-Non-Match: *`)   | `create thing {thingId} -f {filePath}`                  |          |           |            |          |            |        |          |           |
