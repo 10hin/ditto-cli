@@ -22,7 +22,7 @@ And also, I want to implement clients with variable protocols, including HTTP, W
 
 ## Progress and Plans
 
-### Support Matrix
+### Supported command/protocol Matrix
 
 Legend:
 - `&#x2713;`: Implemented.
