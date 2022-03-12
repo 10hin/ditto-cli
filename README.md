@@ -25,22 +25,22 @@ And also, I want to implement clients with variable protocols, including HTTP, W
 ### Supported command/protocol Matrix
 
 Legend:
-- `&#x2713;`: Implemented.
-- `&#x2717;` or empty cell: Not implemented yet.
+- <code>&#x2713;</code>: Implemented.
+- <code>&#x2717;</code> or empty cell: Not implemented yet.
 
 #### Thing commands
 
-| Command&nbsp;\\&nbsp;Protocol                 | CLI Command                                             | HTTP     | Websocket | AMQP 0.9.1 | AMQP 1.0 | MQTT 3.1.1 | MQTT 5 | HTTP 1.1 | Kafka 2.x |
-|:----------------------------------------------|---------------------------------------------------------|----------|-----------|------------|----------|------------|--------|----------|-----------|
-| `GET /things?ids={thingId1},{thingId2}[,...]` | `get thing {thingId1} {thingId2} [...]`                 | &#x2713; |           |            |          |            |        |          |           |
-| `POST /things`                                | `create thing -f {filePath&rang` (no `{thingId}` param) |          |           |            |          |            |        |          |           |
-| `GET /things/{thingId}`                       | `get thing {thingId}`                                   |          |           |            |          |            |        |          |           |
-| `PUT /things/{thingId}` (`If-Non-Match: *`)   | `create thing {thingId} -f {filePath}`                  |          |           |            |          |            |        |          |           |
-| `PUT /things/{thingId}`                       | `replace thing {thingId} -f {filePath}`                 |          |           |            |          |            |        |          |           |
-| `PATCH /things/{thingId}`                     | `patch thing {thingId} -f {filePath}`                   |          |           |            |          |            |        |          |           |
-| `DELETE /things/{thingId}`                    | `delete thing {thingId}`                                |          |           |            |          |            |        |          |           |
-| `GET /search/things`                          | `search thing`                                          |          |           |            |          |            |        |          |           |
-| `GET /search/things/count`                    | `count thing`                                           |          |           |            |          |            |        |          |           |
+| Command&nbsp;\\&nbsp;Protocol                 | CLI Command                                             | HTTP | Websocket | AMQP 0.9.1 | AMQP 1.0 | MQTT 3.1.1 | MQTT 5 | HTTP 1.1 | Kafka 2.x |
+|:----------------------------------------------|---------------------------------------------------------|------|-----------|------------|----------|------------|--------|----------|-----------|
+| `GET /things?ids={thingId1},{thingId2}[,...]` | `get thing {thingId1} {thingId2} [...]`                 |      |           |            |          |            |        |          |           |
+| `POST /things`                                | `create thing -f {filePath&rang` (no `{thingId}` param) |      |           |            |          |            |        |          |           |
+| `GET /things/{thingId}`                       | `get thing {thingId}`                                   |      |           |            |          |            |        |          |           |
+| `PUT /things/{thingId}` (`If-Non-Match: *`)   | `create thing {thingId} -f {filePath}`                  |      |           |            |          |            |        |          |           |
+| `PUT /things/{thingId}`                       | `replace thing {thingId} -f {filePath}`                 |      |           |            |          |            |        |          |           |
+| `PATCH /things/{thingId}`                     | `patch thing {thingId} -f {filePath}`                   |      |           |            |          |            |        |          |           |
+| `DELETE /things/{thingId}`                    | `delete thing {thingId}`                                |      |           |            |          |            |        |          |           |
+| `GET /search/things`                          | `search thing`                                          |      |           |            |          |            |        |          |           |
+| `GET /search/things/count`                    | `count thing`                                           |      |           |            |          |            |        |          |           |
 
 #### Policy commands
 
