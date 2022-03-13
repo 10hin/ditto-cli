@@ -13,8 +13,9 @@ import (
 )
 
 const (
-	pathAPIV2  = "/api/2"
-	pathThings = "/things"
+	apiV2Path             = "/api/2"
+	thingsAPIPath         = "/things"
+	listingQueryKeyForIDs = "ids"
 )
 
 func newThingClient(client *http.Client, cfg *config.HTTPConfig) interfaces.ThingClient {
@@ -39,8 +40,8 @@ func (c *thingClient) Get(thingID string) (*model.Thing, error) {
 	reqURL := fmt.Sprintf(
 		"%s%s%s/%s?fields=%s&timeout=%dms&channel=%s",
 		c.urlPrefix,
-		pathAPIV2,
-		pathThings,
+		apiV2Path,
+		thingsAPIPath,
 		thingID,
 		strings.Join([]string{
 			"thingId",
@@ -74,4 +75,47 @@ func (c *thingClient) Get(thingID string) (*model.Thing, error) {
 	}
 
 	return &t, nil
+}
+
+func (c *thingClient) List(thingIDs []string) ([]*model.Thing, error) {
+	var err error
+
+	reqURL := fmt.Sprintf(
+		"%s%s%s/?%s=%s&fields=%s&timeout=%dms",
+		c.urlPrefix,
+		apiV2Path,
+		thingsAPIPath,
+		listingQueryKeyForIDs,
+		strings.Join(thingIDs, ","),
+		strings.Join([]string{
+			"thingId",
+			"policyId",
+			"attributes",
+			"features",
+		}, ","),
+		c.timeout.Milliseconds(),
+	)
+
+	var resp *http.Response
+	resp, err = c.client.Get(reqURL)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.StatusCode != 200 {
+		var msg []byte
+		msg, err = ioutil.ReadAll(resp.Body)
+		if err != nil {
+			return nil, fmt.Errorf("failed to read response body: %w", err)
+		}
+		return nil, fmt.Errorf("unexpected response status: %d; response body: %s", resp.StatusCode, (string)(msg))
+	}
+
+	var l []*model.Thing
+	err = json.NewDecoder(resp.Body).Decode(&l)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse response as JSON: %w", err)
+	}
+
+	return l, nil
 }
