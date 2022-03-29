@@ -9,4 +9,5 @@ type Client interface {
 type ThingClient interface {
 	Get(thingID string) (*model.Thing, error)
 	List(thingIDs []string) ([]*model.Thing, error)
+	Create(tingDraft *model.ThingDraft) (*model.Thing, error)
 }
