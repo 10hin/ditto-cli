@@ -15,6 +15,14 @@ type Thing struct {
 	Metadata   *Metadata   `json:"_metadata,omitempty"`
 }
 
+type ThingDraft struct {
+	PolicyID   string      `json:"policyId,omitempty"`
+	Definition string      `json:"definition,omitempty"`
+	Attributes *Attributes `json:"attributes,omitempty"`
+	Features   *Features   `json:"features,omitempty"`
+	Metadata   *Metadata   `json:"_metadata,omitempty"`
+}
+
 type Attributes map[string]interface{}
 
 type Features map[string]Feature

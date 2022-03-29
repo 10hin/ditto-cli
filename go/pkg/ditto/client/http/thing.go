@@ -119,3 +119,8 @@ func (c *thingClient) List(thingIDs []string) ([]*model.Thing, error) {
 
 	return l, nil
 }
+
+func (c *thingClient) Create(thingDraft *model.ThingDraft) (*model.Thing, error) {
+	// TODO implement
+	return nil, fmt.Errorf("not implemented yet")
+}
