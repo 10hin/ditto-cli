@@ -1,6 +1,7 @@
 package http
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"golang.10h.in/ditto/cli/pkg/ditto/client/interfaces"
@@ -16,6 +17,7 @@ const (
 	apiV2Path             = "/api/2"
 	thingsAPIPath         = "/things"
 	listingQueryKeyForIDs = "ids"
+	contentType           = "application/json"
 )
 
 func newThingClient(client *http.Client, cfg *config.HTTPConfig) interfaces.ThingClient {
@@ -118,4 +120,29 @@ func (c *thingClient) List(thingIDs []string) ([]*model.Thing, error) {
 	}
 
 	return l, nil
+}
+
+func (c *thingClient) Create(thingDraft *model.ThingDraft) (*model.Thing, error) {
+	var err error
+	url := fmt.Sprintf("%s%s%s/", c.urlPrefix, apiV2Path, thingsAPIPath)
+
+	var body bytes.Buffer
+	err = json.NewEncoder(&body).Encode(thingDraft)
+	if err != nil {
+		return nil, err
+	}
+
+	var resp *http.Response
+	resp, err = c.client.Post(url, contentType, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	if 400 <= resp.StatusCode && resp.StatusCode < 500 {
+		var respBody []byte
+		respBody, err = ioutil.ReadAll(resp.Body)
+		return nil, fmt.Errorf("server respond client error: %s: %s", resp.Status, (string)(respBody))
+	}
+
+	return nil, fmt.Errorf("not implemented yet")
 }
