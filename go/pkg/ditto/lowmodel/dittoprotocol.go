@@ -1,4 +1,4 @@
-package model
+package lowmodel
 
 import (
 	"time"
